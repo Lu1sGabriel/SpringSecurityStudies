@@ -1,9 +1,8 @@
-### GET request to example server
+### Requisição GET com o Bearer Token
 GET http://localhost:8080/teste
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInN1YiI6Imx1aXNnb2VzQGdtYWlsLmNvbSIsImV4cCI6MTc2MDU2NzE2NSwiaWF0IjoxNzYwNDgwNzY1fQ.m0Mt3LqXuyoXji4HJGa4wie2jBdr4IvjC6gJvM5y7hA
 
 ### Requisção POST para criar um usuário
-
 POST http://localhost:8080/auth/register
 Content-Type: application/json
 
@@ -13,9 +12,7 @@ Content-Type: application/json
   "password": "senha123"
 }
 
-
-###
-
+### Requisição POST para fazer o login e retornar o token de autenticação
 POST http://localhost:8080/auth/login
 Content-Type: application/json
 
