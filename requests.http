@@ -1,18 +1,29 @@
 ### Requisição GET com o Bearer Token
 GET http://localhost:8080/teste
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInN1YiI6Imx1aXNnb2VzQGdtYWlsLmNvbSIsImV4cCI6MTc2MDU2NzE2NSwiaWF0IjoxNzYwNDgwNzY1fQ.m0Mt3LqXuyoXji4HJGa4wie2jBdr4IvjC6gJvM5y7hA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwic3ViIjoibHVpc2dvZXNAZ21haWwuY29tIiwiZXhwIjoxNzYxMjQ3MTYyLCJpYXQiOjE3NjExNjA3NjJ9.me_9lnT_-LQPKLBt9E_kb59XM_OM4ok3RBf9rnOFOD0
 
-### Requisção POST para criar um usuário
+### Requisção POST para criar um usuário com a role de ADMIN
 POST http://localhost:8080/auth/register
 Content-Type: application/json
 
 {
   "name": "Luis Gabriel Goés",
   "email": "luisgoes@gmail.com",
+  "password": "senha123",
+  "role": "ROLE_ADMIN"
+}
+
+### Requisção POST para criar um usuário com a role de USER
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "name": "João Paulo Machado",
+  "email": "joaomachado@gmail.com",
   "password": "senha123"
 }
 
-### Requisição POST para fazer o login e retornar o token de autenticação
+### Requisição POST para fazer o login como o usuário do tipo ADMIN e retornar o token de autenticação
 POST http://localhost:8080/auth/login
 Content-Type: application/json
 
@@ -20,3 +31,20 @@ Content-Type: application/json
   "email": "luisgoes@gmail.com",
   "password": "senha123"
 }
+
+### Requisição POST para fazer o login como o usuário do tipo USER e retornar o token de autenticação
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "joaomachado@gmail.com",
+  "password": "senha123"
+}
+
+### Requisição GET para a rota que aceita apenas usuário do tipo ADMIN
+GET http://localhost:8080/admin/panel
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwic3ViIjoibHVpc2dvZXNAZ21haWwuY29tIiwiZXhwIjoxNzYxMjQ3MTYyLCJpYXQiOjE3NjExNjA3NjJ9.me_9lnT_-LQPKLBt9E_kb59XM_OM4ok3RBf9rnOFOD0
+
+### Requisição GET para a rota que aceita usuário do tipo USER ou ADMIN
+GET http://localhost:8080/user/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJzdWIiOiJqb2FvbWFjaGFkb0BnbWFpbC5jb20iLCJleHAiOjE3NjEyNDgzMTYsImlhdCI6MTc2MTE2MTkxNn0.0d7o4kjzTGZ3lhwjwNTxyRbwpscLTGAQ42gCfqOl6EE
