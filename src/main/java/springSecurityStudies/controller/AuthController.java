@@ -17,6 +17,7 @@ import springSecurityStudies.dto.request.LoginRequest;
 import springSecurityStudies.dto.request.RegisterUserRequest;
 import springSecurityStudies.dto.response.LoginResponse;
 import springSecurityStudies.dto.response.RegisterUserResponse;
+import springSecurityStudies.entity.Role;
 import springSecurityStudies.entity.User;
 import springSecurityStudies.exception.types.DataConflictException;
 import springSecurityStudies.repository.UserRepository;
@@ -44,7 +45,9 @@ public class AuthController {
     public ResponseEntity<RegisterUserResponse> registerUser(@Valid @RequestBody RegisterUserRequest request) {
         validadeUniqueEmail(request.email());
 
-        User user = new User(request.name(), request.email(), passwordEncoder.encode(request.password()));
+        var role = (request.role() != null) ? request.role() : Role.ROLE_USER;
+
+        User user = new User(request.name(), request.email(), passwordEncoder.encode(request.password()), role);
         userRepository.save(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new RegisterUserResponse(
